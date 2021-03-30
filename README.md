@@ -20,26 +20,26 @@ to follow the procedure of the inputs (SSLMs) calculation step by step.
 
 ## Package Structure
 
-[*vae/*](vae/)<br/>
+[*boundariesdetectioncnn/*](vae/)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;module containing VAE architecture, training and data uitilities.
 
-[*vae/models*](vae/models)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;VAE models.
+[*boundariesdetectioncnn/models*](vae/models)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;CNN models.
 
-[*vae/data*](vae/data)<br/>
+[*boundariesdetectioncnn/data*](vae/data)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;data handling tools.
 
-[*vae/reconstructions*](vae/reconstructions)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;reconstruction tools.
+[*boundariesdetectioncnn/train*](vae/latent_spaces)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;model training tools.
 
-[*vae/latent_spaces*](vae/latent_spaces)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;latent_spaces tools(e.g. dimensionality reduction and plotting tools).
+[*boundariesdetectioncnn/evaluation*](vae/reconstructions)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;model evaluation tools.
 
 [*notebooks/*](notebooks/)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;tutorial notebooks.
 
 [*tests/*](tests/)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;tests.
+&nbsp;&nbsp;&nbsp;&nbsp;unit tests.
 
 
 
