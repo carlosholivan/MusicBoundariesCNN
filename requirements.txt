@@ -1,6 +1,7 @@
-!pip install torch
-!pip install plotly
-!pip install librosa==0.8.0
+torch
+plotly
+librosa==0.8.0
+coverage
 # orca - exprot plotly plots to png
-!conda install -c plotly plotly-orca
+conda install -c plotly plotly-orca
 

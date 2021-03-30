@@ -11,12 +11,12 @@ from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 import os
 import matplotlib.pyplot as plt
-from extract_labels_from_txt import ReadDataFromtxt
 import librosa
 
 # Our modules
-from data import pink_noise
-from data.normalize_image import normalize
+from boundariesdetectioncnn.data import pink_noise
+from boundariesdetectioncnn.data.normalize_image import normalize
+from boundariesdetectioncnn.data.extract_labels_from_txt import ReadDataFromtxt
 
 "Create array of labels"
 def gaussian(x, mu, sig):
@@ -108,7 +108,7 @@ class SSMDataset(Dataset):
                             image = np.load(img_path) #plt.imread si queremos abrir imagen
                             self.images_list.append(image)
                         #labels path
-                        path = lab_dirpath + f[:-4] + "/parsed/"
+                        path = os.path.join(lab_dirpath, f[:-4] + "/parsed/")
                         txt1 = "textfile1_functions.txt"
                         txt2 = "textfile2_functions.txt"
                         if os.path.isfile(path + txt1):
@@ -118,15 +118,7 @@ class SSMDataset(Dataset):
                         label_path = path + txt
                         label = np.asarray(ReadDataFromtxt(path, txt), dtype=np.float32)
                         labels_sec = np.asarray(ReadDataFromtxt(path, txt), dtype=np.float32)
-                        """
-                        #if we remove too proximate labels
-                        repeated_list = []
-                        for i in range(len(label)):
-                            if (label[i] - label[i-1] < 1) and (label[i] !=0):
-                                repeated_list.append(i)
-                        label = np.delete(label, repeated_list, 0)
-                        labels_sec = np.delete(labels_sec, repeated_list, 0)
-                        """
+           
                         self.labels_list.append(label)
                         self.labels_sec_list.append(labels_sec)
         self.transforms = transforms
@@ -149,6 +141,15 @@ class SSMDataset(Dataset):
             for t in self.transforms:
                 image, label = t(image, label)
         return image, label, labels_sec
+
+
+def build_dataloader(batch_size, input_train_path, labels_path):
+
+    dataset_train = SSMDataset(input_train_path, labels_path, transforms=[normalize_image, padding_MLS, borders])
+    trainloader = DataLoader(dataset_train, batch_size=batch_size, num_workers=0)
+
+    return dataset_train, trainloader
+
 
 """
 batch_size = 1
