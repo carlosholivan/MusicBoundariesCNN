@@ -8,9 +8,9 @@ __pycache__/
 # dataset
 Inputs/
 data_all/
-Trained_models/
-Trained models/
+graphs/
 Results/
+weights/
 
 # Distribution / packaging
 .Python

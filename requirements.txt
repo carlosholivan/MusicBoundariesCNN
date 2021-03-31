@@ -2,6 +2,10 @@ torch
 plotly
 librosa==0.8.0
 coverage
+tensorboardX
+tqdm
+torchvision
+mir_eval
 # orca - exprot plotly plots to png
 conda install -c plotly plotly-orca
 
