@@ -20,6 +20,11 @@ to follow the procedure of the inputs (SSLMs) calculation step by step.
 
 <img src="results/song1076_mls.png"  width="480">
 
+## TODOs
+
+- [ ] Fix Training script
+- [ ] Fix Evaluation script
+- [ ] Make a test script where an audio file is taken and the prediction is given as the output
 
 ## Package Structure
 

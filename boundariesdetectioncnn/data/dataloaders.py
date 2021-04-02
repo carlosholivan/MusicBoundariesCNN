@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 import librosa
 
 # Our modules
+from boundariesdetectioncnn import configs
 from boundariesdetectioncnn.data import pink_noise
 from boundariesdetectioncnn.data.normalize_image import normalize
 from boundariesdetectioncnn.data.extract_labels_from_txt import ReadDataFromtxt
@@ -143,12 +144,28 @@ class SSMDataset(Dataset):
         return image, label, labels_sec
 
 
-def build_dataloader(batch_size, input_train_path, labels_path):
+def select_run(input, run):
+    if run == 'train':
+        input_path = configs.INPUTS[input][0]
 
-    dataset_train = SSMDataset(input_train_path, labels_path, transforms=[normalize_image, padding_MLS, borders])
-    trainloader = DataLoader(dataset_train, batch_size=batch_size, num_workers=0)
+    if run == 'validation':
+        input_path = configs.INPUTS[input][1]
 
-    return dataset_train, trainloader
+    elif run == 'test':
+        input_path = configs.INPUTS[input][2]
+
+    return input_path
+
+
+def build_dataloader(batch_size, input, run):
+    
+    input_path = select_run(input, run)
+    labels_path = configs.PathsConfig.LABELS_PATH
+
+    dataset = SSMDataset(input_path, labels_path, transforms=[normalize_image, padding_MLS, borders])
+    loader = DataLoader(dataset, batch_size=batch_size, num_workers=0)
+
+    return dataset, loader
 
 
 """
